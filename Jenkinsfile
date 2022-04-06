@@ -174,6 +174,12 @@ pipeline {
                     DATABASE_PASSWORD= "3d5bb24b-1231-40eb-8d52-5ee70743b254"
                     INSTANCE_CONNECTION_NAME= "172.20.144.24"
 
+                    HOST= "0.0.0.0"
+                    PORT= "1337"
+                    APP_KEYS= "URyt0J630/QrrW1t8yNQgA==,74iUt2BBQVPO7sJIX3QxbQ==,nKAUwqAmSIUYw7TZkvKjyw==,Oa5Xe5uDcgfK7Rk4C7uRNA=="
+                    JWT_SECRET= "559cb22c-982a-4ffb-a1b1-612e4a5cbec0"
+                    API_TOKEN_SALT= "52e2dbea5f02216922527c0c9f4faeec"
+
                     // NON EDITABLE
                     NAMESPACE = "${PROJECT_ID}-${APP_ENV}".toLowerCase()
                     NAMESPACED_DEPLOYMENT_FILENAME = "./k8s-deploy-${APP_ENV}.yml".toLowerCase()
