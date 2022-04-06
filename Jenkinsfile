@@ -232,34 +232,34 @@ pipeline {
 
             }
         }
-        stage('[PROD] CRON - Push & Deploy') {
-            agent any
-            steps{
-                sh "cp ./k8s-deploy-cron.yml ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
-                sh "sed -i \"s/{NAMESPACE}/${CRON_NAMESPACE}/g\" ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
-                sh "sed -i \"s/{BUILD_NUMBER}/${BUILD_NUMBER}/g\" ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
-                sh "sed -i \"s/{PROJECT_ID}/${CRON_PROJECT_ID}/g\" ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
-                sh "sed -i \"s/{DOCKER_IMAGE_TAG}/${DOCKER_IMAGE_TAG}/g\" ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
+        // stage('[PROD] CRON - Push & Deploy') {
+        //     agent any
+        //     steps{
+        //         sh "cp ./k8s-deploy-cron.yml ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
+        //         sh "sed -i \"s/{NAMESPACE}/${CRON_NAMESPACE}/g\" ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
+        //         sh "sed -i \"s/{BUILD_NUMBER}/${BUILD_NUMBER}/g\" ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
+        //         sh "sed -i \"s/{PROJECT_ID}/${CRON_PROJECT_ID}/g\" ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
+        //         sh "sed -i \"s/{DOCKER_IMAGE_TAG}/${DOCKER_IMAGE_TAG}/g\" ${CRON_NAMESPACED_DEPLOYMENT_FILENAME}"
 
-                script {
-                    docker.withRegistry('https://asia.gcr.io', "gcr:eezee-client") {
+        //         script {
+        //             docker.withRegistry('https://asia.gcr.io', "gcr:eezee-client") {
 
-                        dockerImageCron.push(DOCKER_IMAGE_TAG)
+        //                 dockerImageCron.push(DOCKER_IMAGE_TAG)
 
-                    }
-                }
-                step([
-                    $class: 'KubernetesEngineBuilder',
-                    projectId: "eezee-client",
-                    clusterName: "gke-cluster",
-                    location: "asia-southeast1-a",
-                    manifestPattern: "${CRON_NAMESPACED_DEPLOYMENT_FILENAME}",
-                    credentialsId: "eezee-client",
-                    verifyDeployments: true
-                ])
+        //             }
+        //         }
+        //         step([
+        //             $class: 'KubernetesEngineBuilder',
+        //             projectId: "eezee-client",
+        //             clusterName: "gke-cluster",
+        //             location: "asia-southeast1-a",
+        //             manifestPattern: "${CRON_NAMESPACED_DEPLOYMENT_FILENAME}",
+        //             credentialsId: "eezee-client",
+        //             verifyDeployments: true
+        //         ])
 
-            }
-        }
+        //     }
+        // }
 
     }
 }
