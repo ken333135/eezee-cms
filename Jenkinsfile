@@ -233,7 +233,7 @@ pipeline {
                     location: "asia-southeast1-a",
                     manifestPattern: "${NAMESPACED_DEPLOYMENT_FILENAME}",
                     credentialsId: "eezee-client",
-                    verifyDeployments: true
+                    // verifyDeployments: true
                 ])
 
             }
