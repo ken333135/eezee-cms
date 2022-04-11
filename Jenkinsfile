@@ -205,7 +205,7 @@ pipeline {
             steps{
                 script {
                     dockerImage = docker.build("eezee-client/${PROJECT_ID}", "-f ./Dockerfile.httpServer .")
-                    dockerImageCron = docker.build("eezee-client/${CRON_PROJECT_ID}", "-f ./Dockerfile.cron .")
+                    // dockerImageCron = docker.build("eezee-client/${CRON_PROJECT_ID}", "-f ./Dockerfile.cron .")
                 }
             }
         }
