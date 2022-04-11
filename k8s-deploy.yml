@@ -29,7 +29,7 @@ spec:
           image: asia.gcr.io/eezee-client/{PROJECT_ID}:{DOCKER_IMAGE_TAG}
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 1337
 ---
 # ------ SERVICEs ------
 apiVersion: v1
@@ -41,5 +41,5 @@ spec:
   selector:
     app: "{NAMESPACE}"
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 1337
+      targetPort: 1337
